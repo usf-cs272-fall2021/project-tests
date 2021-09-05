@@ -136,16 +136,38 @@ public class Project2Test extends TestUtilities {
 		 */
 		@Order(2)
 		@Test
-		public void testStemsDirectory() {
+		public void testStemsWords() {
 			Path input = TEXT_PATH.resolve("stems");
 			String query = "words.txt";
 			testSearch(subdir, input, query, exact);
 		}
 
 		/**
-		 * Tests the search result output for the rfcs subdirectory.
+		 * Tests the search result output for the text subdirectory.
 		 */
 		@Order(3)
+		@Test
+		public void testStemsRespect() {
+			Path input = TEXT_PATH.resolve("stems");
+			String query = "respect.txt";
+			testSearch(subdir, input, query, exact);
+		}
+
+		/**
+		 * Tests the search result output for the stems directory.
+		 */
+		@Order(4)
+		@Test
+		public void testStemsLetters() {
+			Path input = TEXT_PATH.resolve("stems");
+			String query = "letters.txt";
+			testSearch(subdir, input, query, exact);
+		}
+
+		/**
+		 * Tests the search result output for the rfcs subdirectory.
+		 */
+		@Order(5)
 		@Test
 		public void testRfcDirectory() {
 			Path input = TEXT_PATH.resolve("rfcs");
@@ -158,7 +180,7 @@ public class Project2Test extends TestUtilities {
 		 *
 		 * @param filename filename of a text file in the guten subdirectory
 		 */
-		@Order(4)
+		@Order(6)
 		@ParameterizedTest
 		@ValueSource(strings = {
 				"pg37134.txt", // The Elements of Style by William Strunk
@@ -178,7 +200,7 @@ public class Project2Test extends TestUtilities {
 		/**
 		 * Tests the search result output for the guten subdirectory.
 		 */
-		@Order(5)
+		@Order(7)
 		@Test
 		public void testGutenDirectory() {
 			Path input = TEXT_PATH.resolve("guten");
@@ -189,12 +211,36 @@ public class Project2Test extends TestUtilities {
 		/**
 		 * Tests the search result output for the text subdirectory.
 		 */
-		@Order(6)
+		@Order(8)
+		@Test
+		@Tag("verify")
+		public void testTextRespect() {
+			Path input = TEXT_PATH;
+			String query = "respect.txt";
+			testSearch(subdir, input, query, exact);
+		}
+
+		/**
+		 * Tests the search result output for the text subdirectory.
+		 */
+		@Order(9)
+		@Test
+		@Tag("verify")
+		public void testTextWords() {
+			Path input = TEXT_PATH;
+			String query = "words.txt";
+			testSearch(subdir, input, query, exact);
+		}
+
+		/**
+		 * Tests the search result output for the text subdirectory.
+		 */
+		@Order(10)
 		@Test
 		@Tag("verify")
 		public void testTextDirectory() {
 			Path input = TEXT_PATH;
-			String query = "words.txt";
+			String query = "complex.txt";
 			testSearch(subdir, input, query, exact);
 		}
 	}
@@ -390,11 +436,14 @@ public class Project2Test extends TestUtilities {
 		try {
 			new Project3aTest().new E_ApproachTest().testMultithreadedBuild();
 			new Project3aTest().new E_ApproachTest().testMultithreadedSearch();
-			Assertions.fail("The next project tests should NOT pass. Make sure you do not have code for the next project in your current branch.");
 		}
 		catch (AssertionFailedError e) {
-			// a rare instance where we want to do nothing here
+			// we expected an exception, return without failing
+			return;
 		}
+
+		// should not have passed!
+		Assertions.fail("The next project tests should NOT pass. Make sure you do not have code for the next project in your current branch.");
 	}
 
 	/*
@@ -415,7 +464,7 @@ public class Project2Test extends TestUtilities {
 	 */
 	public static void testSearch(String subdir, Path input, String query, boolean exact) {
 		String type = exact ? "exact" : "partial";
-		String prefix = "search-" + type;
+		String prefix = "search-" + type + "-" + query.split("\\.")[0];
 		String filename = outputFileName(prefix, input);
 
 		Path actual = ACTUAL_PATH.resolve(filename).normalize();

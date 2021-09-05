@@ -174,12 +174,12 @@ public class Project3bTest extends TestUtilities {
 		public void testSearchMultithreaded() {
 			String[] args1 = {
 					TEXT_FLAG, TEXT_PATH.toString(),
-					QUERY_FLAG, QUERY_PATH.resolve("words.txt").toString(),
+					QUERY_FLAG, QUERY_PATH.resolve("complex.txt").toString(),
 					THREADS_FLAG, String.valueOf(1) };
 
 			String[] args2 = {
 					TEXT_FLAG, TEXT_PATH.toString(),
-					QUERY_FLAG, QUERY_PATH.resolve("words.txt").toString(),
+					QUERY_FLAG, QUERY_PATH.resolve("complex.txt").toString(),
 					THREADS_FLAG, String.valueOf(BENCH_THREADS) };
 
 			System.out.println();
@@ -208,11 +208,11 @@ public class Project3bTest extends TestUtilities {
 		public void testSearchSingleMulti() {
 			String[] args1 = {
 					TEXT_FLAG, TEXT_PATH.toString(),
-					QUERY_FLAG, QUERY_PATH.resolve("words.txt").toString() };
+					QUERY_FLAG, QUERY_PATH.resolve("complex.txt").toString() };
 
 			String[] args2 = {
 					TEXT_FLAG, TEXT_PATH.toString(),
-					QUERY_FLAG, QUERY_PATH.resolve("words.txt").toString(),
+					QUERY_FLAG, QUERY_PATH.resolve("complex.txt").toString(),
 					THREADS_FLAG, String.valueOf(BENCH_THREADS) };
 
 			System.out.println();
@@ -242,11 +242,14 @@ public class Project3bTest extends TestUtilities {
 	public void verifyNextProject() {
 		try {
 			new Project4Test().new C_SearchTest().testJava(false);
-			Assertions.fail("The next project tests should NOT pass. Make sure you do not have code for the next project in your current branch.");
 		}
 		catch (AssertionFailedError e) {
-			// a rare instance where we want to do nothing here
+			// we expected an exception, return without failing
+			return;
 		}
+
+		// should not have passed!
+		Assertions.fail("The next project tests should NOT pass. Make sure you do not have code for the next project in your current branch.");
 	}
 
 	/** The number of warmup runs when benchmarking. */

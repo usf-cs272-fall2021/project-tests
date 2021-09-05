@@ -420,7 +420,7 @@ public class Project4Test extends TestUtilities {
 	@Tag("verify")
 	@Tag("previous")
 	public void verifyPreviousProject() {
-		runTestClass(Project3aTest.class);
+		runTestClass(Project3aTest.C_PartialSearchTest.class);
 	}
 
 	/** Where to locate expected files for web crawling. */

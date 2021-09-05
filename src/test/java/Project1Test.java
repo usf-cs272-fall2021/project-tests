@@ -326,12 +326,14 @@ public class Project1Test extends TestUtilities {
 			var test = new Project2Test().new C_PartialSearchTest();
 			test.setup();
 			test.testTextDirectory();
-
-			Assertions.fail("The next project tests should NOT pass. Make sure you do not have code for the next project in your current branch.");
 		}
 		catch (AssertionFailedError e) {
-			// a rare instance where we want to do nothing here
+			// we expected an exception, return without failing
+			return;
 		}
+
+		// should not have passed!
+		Assertions.fail("The next project tests should NOT pass. Make sure you do not have code for the next project in your current branch.");
 	}
 
 	/*

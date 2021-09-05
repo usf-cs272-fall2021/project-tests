@@ -455,11 +455,14 @@ public class Project3aTest extends TestUtilities {
 	public void verifyNextProject() {
 		try {
 			new Project4Test().new C_SearchTest().testJava(false);
-			Assertions.fail("The next project tests should NOT pass. Make sure you do not have code for the next project in your current branch.");
 		}
 		catch (AssertionFailedError e) {
-			// a rare instance where we want to do nothing here
+			// we expected an exception, return without failing
+			return;
 		}
+
+		// should not have passed!
+		Assertions.fail("The next project tests should NOT pass. Make sure you do not have code for the next project in your current branch.");
 	}
 
 	/** The default number of threads to use in mutlithreading approach tests. */
@@ -567,7 +570,7 @@ public class Project3aTest extends TestUtilities {
 	 */
 	public static void testSearch(String subdir, Path input, String query, boolean exact, int threads) {
 		String type = exact ? "exact" : "partial";
-		String prefix = "search-" + type;
+		String prefix = "search-" + type + "-" + query.split("\\.")[0];
 		String filename = outputFileName(prefix, input);
 		String threaded = outputFileName(prefix, input, threads);
 
