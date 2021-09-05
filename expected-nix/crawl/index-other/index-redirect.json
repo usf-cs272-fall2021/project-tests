@@ -1,0 +1,22 @@
+{
+	"gone": {
+		"https://www.cs.usfca.edu/~cs272/redirect/index.html": [
+			2
+		]
+	},
+	"loop": {
+		"https://www.cs.usfca.edu/~cs272/redirect/index.html": [
+			3
+		]
+	},
+	"nowher": {
+		"https://www.cs.usfca.edu/~cs272/redirect/index.html": [
+			1
+		]
+	},
+	"redirect": {
+		"https://www.cs.usfca.edu/~cs272/redirect/index.html": [
+			4
+		]
+	}
+}
