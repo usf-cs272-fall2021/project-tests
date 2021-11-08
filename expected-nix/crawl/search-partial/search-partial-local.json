@@ -942,6 +942,11 @@
 		{
 			"count": 4,
 			"score": 0.50000000,
+			"where": "https://www.cs.usfca.edu/~cs272/redirect/one"
+		},
+		{
+			"count": 4,
+			"score": 0.50000000,
 			"where": "https://www.cs.usfca.edu/~cs272/simple/hello.html"
 		},
 		{
@@ -2524,6 +2529,11 @@
 		}
 	],
 	"w": [
+		{
+			"count": 4,
+			"score": 0.50000000,
+			"where": "https://www.cs.usfca.edu/~cs272/redirect/one"
+		},
 		{
 			"count": 4,
 			"score": 0.50000000,
